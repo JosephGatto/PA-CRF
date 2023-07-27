@@ -7,7 +7,7 @@ import pdb
 import torch
 from torch.nn import DataParallel
 import numpy as np
-
+from tqdm.auto import tqdm
 class Framework:
     def __init__(self, 
                  train_dataset=None, 
@@ -76,7 +76,7 @@ class Framework:
             eval_dataset = self.train_dataset
         
         model.eval()        
-        for i in range(eval_epoch):
+        for i in tqdm(range(eval_epoch)):
             support_set, query_set, id2label = next(eval_dataset)
             support_set, query_set = self.to_device(support_set), self.to_device(query_set)
             loss, logits, pred = model(support_set, query_set, evalN, K, Q)
