@@ -27,8 +27,8 @@ class ProtoDot(nn.Module):
 
     def forward(self, support_set, query_set, N, K, Q):
         # encode
-        support_emb = self.encoder(support_set['tokens'])   # B*N*K, max_len, feature_size
-        query_emb = self.encoder(query_set['tokens'])       # B*N*K, max_len, feature_size
+        support_emb = self.encoder(support_set['tokens'])['last_hidden_state']   # B*N*K, max_len, feature_size
+        query_emb = self.encoder(query_set['tokens'])['last_hidden_state']       # B*N*K, max_len, feature_size
         
         # dropout
         support_emb = self.drop(support_emb)                # B*N*K, max_len, feature_size
