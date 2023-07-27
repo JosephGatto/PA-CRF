@@ -18,7 +18,7 @@ class ProtoDot(nn.Module):
         self.max_len = max_len
         
         self.encoder = encoder
-        # self.encoder = nn.DataParallel(self.encoder)
+        self.encoder = nn.DataParallel(self.encoder)
         
         self.cost = nn.CrossEntropyLoss(reduction="none")
         
